@@ -1,0 +1,77 @@
+// { Driver Code Starts
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+
+class DriverClass
+{
+    public static void main (String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        
+        while(t-- > 0)
+        {
+            ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+            int nov = sc.nextInt();
+            int edg = sc.nextInt();
+            for(int i = 0; i < nov+1; i++)
+                list.add(i, new ArrayList<Integer>());
+            for(int i = 1; i <= edg; i++)
+            {
+                int u = sc.nextInt();
+                int v = sc.nextInt();
+                list.get(u).add(v);
+            }
+            if(new DetectCycle().isCyclic(list, nov) == true)
+                System.out.println("1");
+            else System.out.println("0");
+        }
+    }
+}// } Driver Code Ends
+
+
+/*Complete the function below*/
+
+/*
+ArrayList<ArrayList<Integer>> adj: to represent graph containing 'v'
+                                    vertices and edges between them
+V: represent number of vertices
+*/
+class DetectCycle
+{
+    static boolean dfsRec(ArrayList<ArrayList<Integer>> adj, int s, boolean[] visited, boolean[] recstack){
+        visited[s] = true;
+        recstack[s] = true;
+        
+        for(int u : adj.get(s)) {
+            if(visited[u] == false && dfsRec(adj, u, visited, recstack) == true) {
+                return true; 
+            } else if(recstack[u] == true) {
+                return true;
+            }
+        }
+        
+        recstack[s] = false;
+        
+        return false;
+        
+    }
+    
+    
+    static boolean isCyclic(ArrayList<ArrayList<Integer>> adj, int V)
+    {
+        // add your code here
+        
+        boolean[] visited = new boolean[V];
+        boolean[] recstack = new boolean[V];
+        
+        for(int i=0;i<V;i++) {
+            if(dfsRec(adj, i, visited, recstack) == true) {
+                return true;
+            }
+        }
+        
+        return false;
+        
+    }
+}
