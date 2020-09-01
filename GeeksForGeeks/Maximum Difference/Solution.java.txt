@@ -1,0 +1,38 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+    public static void printDifference(int[] a, int n) {
+        int result = a[1] - a[0];
+        int minimum = a[0];
+        
+        for(int i=1;i<n;i++) {
+            if(a[i] - minimum > result) {
+                result = a[i] - minimum;
+            }
+            result = Math.max(result, a[i] - minimum);
+            minimum = Math.min(minimum, a[i]);
+        }
+        
+        System.out.println(result);
+    }
+	public static void main (String[] args) {
+	
+	    Scanner scan = new Scanner(System.in);
+	    int t = scan.nextInt();
+	    while(t-- > 0) {
+	    
+	        int n = scan.nextInt();
+	        int[] arr = new int[n];
+	        for(int i=0;i<n;i++) {
+	            arr[i] = scan.nextInt();
+	        }
+	        
+	        printDifference(arr, n);
+	    
+	    }
+	
+	}
+	 
+}
