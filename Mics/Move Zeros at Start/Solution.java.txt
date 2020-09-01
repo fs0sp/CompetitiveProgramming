@@ -1,0 +1,32 @@
+
+
+public class Main
+{
+    
+    public static void move(int[] a, int n) {
+        int c = n-1;
+        
+        for(int i=n-1;i>=0;i--) {
+            if(a[i] != 0) {
+                a[c--] = a[i];
+            }
+        }
+        
+        for(int i=c;i>=0;i--) {
+            a[i] = 0;
+        }
+        
+        // print 
+        
+        for(int i : a) {
+            System.out.print( i +" ");
+        }
+        
+    }
+    
+	public static void main(String[] args) {
+	    int[] a = {0,3 , 22, 1, 2, 0, 10, 9, 0};
+	    move(a, a.length);
+		
+	}
+}
